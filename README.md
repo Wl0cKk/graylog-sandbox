@@ -1,2 +1,2 @@
 # graylog-sandbox
-Tests and showing my solution
+Tests and a demonstration of my solution
