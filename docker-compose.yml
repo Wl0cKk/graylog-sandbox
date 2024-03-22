@@ -1,0 +1,17 @@
+version: '3.8'
+  services:
+    elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch
+      enviroment: 
+        - discovery.type=single-node
+      ports:
+        - 9200:9200
+      restart: "on-failure"
+    mongodb:
+      image: mongo
+      volumes:
+        - "mongodb_data:/data/db"
+      restart: always
+    graylog:
+      image: graylog/graylog
+      volumes:
