@@ -3,7 +3,7 @@ services:
   init_volumes:
     image: busybox
     volumes:
-      - "/mnt:/data"
+      - "/mnt:"
     command: sh -c 'if [ ! -d "/graylog-datanode" ]; then mkdir -p /graylog-datanode; fi && if [ ! -d "/graylog" ]; then mkdir -p /graylog; fi'
 
   mongodb:
