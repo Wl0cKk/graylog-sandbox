@@ -6,13 +6,13 @@ version: '3.8'
         - "/mnt:/data"
       command: sh -c 'if [ ! -d "/graylog-datanode" ]; then mkdir -p /graylog-datanode; fi && if [ ! -d "/graylog" ]; then mkdir -p /graylog; fi'
     
-    elasticsearch:
-      image: docker.elastic.co/elasticsearch/elasticsearch
-      enviroment: 
-        - discovery.type=single-node
-      ports:
-        - 9200:9200
-      restart: "on-failure"
+    # elasticsearch:
+    #   image: docker.elastic.co/elasticsearch/elasticsearch
+    #   enviroment: 
+    #     - discovery.type=single-node
+    #   ports:
+    #     - 9200:9200
+    #   restart: "on-failure"
     
     mongodb:
       image: mongo
