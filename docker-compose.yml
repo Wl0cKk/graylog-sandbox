@@ -21,3 +21,8 @@ version: '3.8'
     graylog:
       image: graylog/graylog
       volumes:
+volumes:
+  mongodb_data:
+  graylog-datanode:
+  graylog_data:
+  graylog_journal:
