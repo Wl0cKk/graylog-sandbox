@@ -7,7 +7,7 @@ services:
     command: sh -c 'if [ ! -d "/graylog-datanode" ]; then mkdir -p /graylog-datanode; fi && if [ ! -d "/graylog" ]; then mkdir -p /graylog; fi'
 
   mongodb:
-    image: mongo
+    image: mongo:5.0
     volumes:
       - "mongodb_data:/data/db"
     restart: "on-failure"
@@ -44,6 +44,8 @@ services:
     environment:
       GRAYLOG_NODE_ID_FILE: "/usr/share/graylog/data/data/node-id"
       GRAYLOG_HTTP_BIND_ADDRESS: "0.0.0.0:9000"
+      GRAYLOG_PASSWORD_SECRET: "${GRAYLOG_PASSWORD_SECRET}"
+      GRAYLOG_ROOT_PASSWORD_SHA2: ${GRAYLOG_ROOT_PASSWORD_SHA2}"
       GRAYLOG_HTTP_EXTERNAL_URI: "http://localhost:9000/"
       GRAYLOG_MONGODB_URI: "mongodb://mongodb:27017/graylog"
     ports:
