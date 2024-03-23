@@ -1,5 +1,11 @@
 version: '3.8'
   services:
+  init_volumes:
+      image: busybox
+      volumes:
+        - "/mnt:/data"
+      command: sh -c 'if [ ! -d "/graylog-datanode" ]; then mkdir -p /graylog-datanode; fi && if [ ! -d "/graylog" ]; then mkdir -p /graylog; fi'
+    
     elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch
       enviroment: 
@@ -11,7 +17,7 @@ version: '3.8'
       image: mongo
       volumes:
         - "mongodb_data:/data/db"
-      restart: always
+      restart: "on-failure"
     graylog:
       image: graylog/graylog
       volumes:
