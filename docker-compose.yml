@@ -7,7 +7,7 @@ services:
     command: sh -c 'if [ ! -d "/graylog-datanode" ]; then mkdir -p /graylog-datanode; fi && if [ ! -d "/graylog" ]; then mkdir -p /graylog; fi'
 
   mongodb:
-    image: mongo:5.0
+    image: mongo
     volumes:
       - "mongodb_data:/data/db"
     restart: "on-failure"
