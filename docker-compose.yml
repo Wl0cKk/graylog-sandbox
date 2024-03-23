@@ -17,7 +17,6 @@ services:
     hostname: "datanode"
     volumes:
       - "/mnt/graylog-datanode:/var/lib/graylog-datanode"
-    restart: "on-failure"
     environment:
       GRAYLOG_DATANODE_NODE_ID_FILE: "/var/lib/graylog-datanode/node-id"
       GRAYLOG_DATANODE_MONGODB_URI: "mongodb://mongodb:27017/graylog"
