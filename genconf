@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+require 'digest'
+
+def gen_pass(length)
+  chr = [('a'..'z'), ('A'..'Z'), (0..9)].map(&:to_a).flatten
+  password = Array.new(length) { chr.sample }.join
+end
+
+password = ARGV[0]
+if password == nil
+	puts "Run command like: ./genconf 1111\nWhere 1111 is your password"
+	exit
+end
+
+SECRET = gen_pass(96)
+SHA2 = Digest::SHA256.hexdigest(password)
+
+env = '.env'
+File.open(env, 'a+') { |f| f.write("GRAYLOG_PASSWORD_SECRET=\"#{SECRET}\"\nGRAYLOG_ROOT_PASSWORD_SHA2=\"#{SHA2}\"\n")} unless File.exist?(env)
