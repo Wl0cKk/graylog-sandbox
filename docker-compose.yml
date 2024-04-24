@@ -3,14 +3,14 @@ services:
   mongodb:
     image: "mongo"
     volumes:
-      - "/mnt/mongodb_data:/data/db"
+      - "./mnt/mongodb_data:/data/db"
     restart: "on-failure"
   
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
     #data folder in share for persistence
     volumes:
-      - /mnt/es_data:/usr/share/elasticsearch/data
+      - ./mnt/es_data:/usr/share/elasticsearch/data
     environment:
       - http.host=0.0.0.0
       - transport.host=localhost
@@ -44,7 +44,7 @@ services:
       - "9200:9200/tcp"
       - "9300:9300/tcp"
     volumes:
-      - "/mnt/graylog-datanode:/var/lib/graylog-datanode"
+      - "./mnt/graylog-datanode:/var/lib/graylog-datanode"
     restart: "on-failure"
 
   graylog:
@@ -55,6 +55,7 @@ services:
         condition: "service_started"
     entrypoint: "/usr/bin/tini --  /docker-entrypoint.sh"
     environment:
+      GRAYLOG_JOURNAL_ENABLED: false
       GRAYLOG_NODE_ID_FILE: "/usr/share/graylog/data/data/node-id"
       GRAYLOG_PASSWORD_SECRET: "${GRAYLOG_PASSWORD_SECRET:?Please configure GRAYLOG_PASSWORD_SECRET in the .env file}"
       GRAYLOG_ROOT_PASSWORD_SHA2: "${GRAYLOG_ROOT_PASSWORD_SHA2:?Please configure GRAYLOG_ROOT_PASSWORD_SHA2 in the .env file}"
@@ -75,8 +76,8 @@ services:
     - "13301:13301/tcp" # Forwarder data
     - "13302:13302/tcp" # Forwarder config
     volumes:
-      - "/mnt/graylog_data:/usr/share/graylog/data/data"
-      - "/mnt/graylog_journal:/usr/share/graylog/data/journal"
+      - "./mnt/graylog_data:/usr/share/graylog/data/data"
+      - "./mnt/graylog_journal:/usr/share/graylog/data/journal"
     restart: "on-failure"
 
 volumes:
